@@ -1,0 +1,74 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="progressbar.css"/>
+<script type="text/javascript" src="progressbar.js"></script>
+<title>Progress Bar</title>
+</head>
+<body>
+    <div id = "mytabs">
+        <div class = "section" id ="example">
+    
+        <section>
+            <h2 class="title">Progress Bar</h2>
+            <button class="control" data-type="+25">+25</button>
+            <button class="control" data-type="+10">+10</button>
+            <button class="control" data-type="reset">reset</button>
+            <button class="control" data-type="-25">-25</button>
+            <button class="control" data-type="-10">-10</button>
+
+            <p id="progress0" data-min="0" data-max="230" data-mode="absolute" class=" progressbar"> <span class="bar" style="width: 0%;"></span><span class="value"></span></p>
+            <p id="progress1" data-min="0" data-max="230" data-mode="absolute" class=" progressbar"> <span class="bar" style="width: 0%;"></span><span class="value"></span></p>
+            <p id="progress2" data-min="0" data-max="230" class=" progressbar"> <span class="bar" style="width: 0%;"></span><span class="value"></span></p>
+            <p id="progress3" data-min="0" data-max="230" class=" progressbar"> <span class="bar" style="width: 0%;"></span><span class="value"></span></p>
+        </section>
+      </div>
+    </div>  
+ <script>
+	
+		var bars = [];
+		for(var n=0; n<4; n++) {
+			bars.push( new progressbar(document.getElementById("progress" + n)) );
+		}
+
+		var val = 0, controls = document.querySelectorAll(".control");
+		for(var i=0; i<controls.length; i++) {
+			controls[i].onclick = function() {
+				var type = this.getAttribute("data-type");
+				switch(type) {
+					case "+25":
+						val += 25;
+						if(val > 230) { val = 230; }
+					break;
+					case "-25":
+						val -= 25;
+						if(val < 0) { val = 0; }
+					break;
+                    case "+10":
+						val += 10;
+						if(val > 230) { val = 230; }
+					break;
+                    case "-10":
+						val -= 10;
+						if(val < 0) { val = 0; }
+					break;
+					case "reset":
+						val = 0;
+					break;
+				}
+
+				for(var n=0; n<bars.length; n++) {
+					bars[n].progress(val, n % 2 == 0 ? "done" : "");
+				}
+			}
+		};
+	
+
+</script>
+</body>
+</html>
+
+
+
+ 
